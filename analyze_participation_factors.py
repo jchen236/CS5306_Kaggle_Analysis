@@ -1,5 +1,7 @@
 import urllib.request, json
 import matplotlib.pyplot as plt
+from functools import reduce
+import numpy as np
 
 # The goal of this file is to analyze metadata about a competition and see how that affects the number of teams
 # that submit as well as the total number of submissions
@@ -89,18 +91,54 @@ print(reward_type_to_submissions)
 
 
 # show relationship between reward to number of submissions
-x = []
-y = []
-for pair in reward_to_submissions:
-    x.append(pair[0] / 1000.0)
-    y.append(pair[1])
+# x = []
+# y = []
+# for pair in reward_to_submissions:
+#     x.append(pair[0] / 1000.0)
+#     y.append(pair[1])
 
-plt.scatter(x,y)
-plt.xlabel('Award amount in thousands of $')
+# plt.scatter(x,y)
+# plt.xlabel('Award amount in thousands of $')
+# plt.ylabel('Number of Submissions per Competition')
+# plt.title("Effect of Award Amount on Number of Submissions")
+# plt.savefig("AwardVsSubmission.png")
+# plt.show()
+
+# show relationship between reward type to number of teams
+# keys = ['Knowledge', 'USD', 'Swag', 'Kudos', None,'Jobs']
+# type_counts = []
+# y_pos = np.arange(len(keys))
+# for key in keys:
+#     team_counts = reward_type_to_teams[key]
+#     avg_count = reduce(lambda x, y: x + y, team_counts) / len(team_counts)
+#     type_counts.append(avg_count)
+
+# plt.bar(y_pos, type_counts, align='center', alpha=0.5)
+# plt.xticks(y_pos, keys)
+# plt.ylabel('Number of Teams per Competition')
+# plt.title("Effect of Award Type on Number of Teams")
+# plt.savefig("AwardTypevsTeam.png")
+# plt.show()
+
+
+
+
+# show relationship between reward to number of submissions
+keys = ['Knowledge', 'USD', 'Swag', 'Kudos', None,'Jobs']
+type_counts = []
+y_pos = np.arange(len(keys))
+for key in keys:
+    submission_count = reward_type_to_submissions[key]
+    avg_count = reduce(lambda x, y: x + y, submission_count) / len(submission_count)
+    type_counts.append(avg_count)
+
+plt.bar(y_pos, type_counts, align='center', alpha=0.5)
+plt.xticks(y_pos, keys)
 plt.ylabel('Number of Submissions per Competition')
-plt.title("Effect of Award Amount on Number of Submissions")
-plt.savefig("AwardVsSubmission.png")
+plt.title("Effect of Award Type on Number of Submissions")
+plt.savefig("AwardTypevsSubmissions.png")
 plt.show()
+
 
 
         
