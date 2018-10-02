@@ -34,10 +34,8 @@ for i in range(1, 16):
     for competition in competitions:
         num_competitions+=1
         competition_id = competition['competitionId']
-        if competition_id == "8587":
-            print( reward_quantity = competition['rewardQuantity'])
-        # print("Processing competition {}".format(competition_id))
-        # print("\n")
+        print(competition_id)
+        
         reward_type_name = competition['rewardTypeName']
         reward_quantity = competition['rewardQuantity']
         if reward_type_name == None:
@@ -122,22 +120,21 @@ print(reward_type_to_submissions)
 
 
 
-
 # show relationship between reward to number of submissions
-keys = ['Knowledge', 'USD', 'Swag', 'Kudos', None,'Jobs']
-type_counts = []
-y_pos = np.arange(len(keys))
-for key in keys:
-    submission_count = reward_type_to_submissions[key]
-    avg_count = reduce(lambda x, y: x + y, submission_count) / len(submission_count)
-    type_counts.append(avg_count)
+# keys = ['Knowledge', 'USD', 'Swag', 'Kudos', None,'Jobs']
+# type_counts = []
+# y_pos = np.arange(len(keys))
+# for key in keys:
+#     submission_count = reward_type_to_submissions[key]
+#     avg_count = reduce(lambda x, y: x + y, submission_count) / len(submission_count)
+#     type_counts.append(avg_count)
 
-plt.bar(y_pos, type_counts, align='center', alpha=0.5)
-plt.xticks(y_pos, keys)
-plt.ylabel('Number of Submissions per Competition')
-plt.title("Effect of Award Type on Number of Submissions")
-plt.savefig("AwardTypevsSubmissions.png")
-plt.show()
+# plt.bar(y_pos, type_counts, align='center', alpha=0.5)
+# plt.xticks(y_pos, keys)
+# plt.ylabel('Number of Submissions per Competition')
+# plt.title("Effect of Award Type on Number of Submissions")
+# plt.savefig("AwardTypevsSubmissions.png")
+# plt.show()
 
 
 
